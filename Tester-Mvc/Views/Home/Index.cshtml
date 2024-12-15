@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Tester_Mvc.Models.Student>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+                </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var student in Model){
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => student.Name)
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => student.Age)
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => student.Department)
+                    </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@student.Id">Düzenle</a>
+                    <a asp-action="Details" asp-route-id="@student.Id">Detaylar</a>
+                    <a asp-action="Delete" asp-route-id="@student.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
