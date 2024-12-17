@@ -48,6 +48,50 @@ namespace Tester_Mvc.Controllers
 			}
 			return View(student);
         }
-       
-    }
+
+		public IActionResult Edit(int id)
+		{
+			var student = _context.Students.Find(id);
+			if (student == null)
+			{
+				return NotFound();
+			}
+			return View(student);
+		}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id,[Bind("Id,Name,Age,Department")] Student student)
+        {
+			if (!StudentExists(student.Id) )
+			{
+				return NotFound();
+			}
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					_context.Update(student);
+					_context.SaveChanges();
+				}
+				catch (Exception)
+				{
+					if (!StudentExists (student.Id))
+					{
+						return NotFound();
+					}
+					else
+					{
+						throw;
+					}
+				}
+			}
+			return View(student);
+        }
+
+		private bool StudentExists(int id)
+		{
+			return _context.Students.Any(e => e.Id == id);
+		}
+	}
 }
