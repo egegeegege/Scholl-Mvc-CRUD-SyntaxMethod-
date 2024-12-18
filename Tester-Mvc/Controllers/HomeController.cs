@@ -89,9 +89,36 @@ namespace Tester_Mvc.Controllers
 			return View(student);
         }
 
+
+
 		private bool StudentExists(int id)
 		{
 			return _context.Students.Any(e => e.Id == id);
+		}
+
+		public IActionResult Delete (int id)
+		{
+			var student = _context.Students.Find(id);
+			if (ModelState == null)
+			{
+				return NotFound();
+			}
+			return View(student);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+
+		public IActionResult DeleteConfirmend(int id)
+		{
+			var student = _context.Students.Find(id);
+
+			if (student != null)
+			{
+				_context.Students.Remove(student);
+				_context.SaveChanges();
+			}
+
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

@@ -1,0 +1,38 @@
+﻿@model Student
+
+<h1> Öğrenciyi Sil </h1>
+
+<div>
+	<hr/>
+	<h4>Öğrenciyi silmek istediğinden eminmisin</h4>
+	
+	<dl>
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Age)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Age)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Department)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Department)
+		</dd>
+	</dl>
+
+	<div>
+		<form asp-action="DeleteConfirmend" method="POST">
+			<input type="hidden" asp-for="Id"/>
+			<input type="submit" value="Sil" class="btn btn-danger" />
+			<a asp-action="Index">Geri</a>
+			</form>
+	</div>
+</dl>
+</div>
