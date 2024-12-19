@@ -120,5 +120,15 @@ namespace Tester_Mvc.Controllers
 
 			return RedirectToAction(nameof(Index));
 		}
+
+		public IActionResult QuarySyntax()
+		{
+			var student = (
+				from s in _context.Students
+				where s.Age < 18
+				select s
+				).ToList();
+			return View(student);
+		}
 	}
 }
